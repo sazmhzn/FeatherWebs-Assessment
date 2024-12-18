@@ -14,9 +14,9 @@ const Hamburger = memo(({ isOpen, toggleOpen }) => {
         initial={false}
         animate={isOpen ? "open" : "closed"}
         aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
-        // custom={300}
         custom={height}
         ref={containerRef}
+        className=" py-4 md:px-2 md:py-2"
       >
         {" "}
         <HamburgerToggle isOpen={isOpen} toggle={toggleOpen} />

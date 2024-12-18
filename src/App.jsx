@@ -124,7 +124,7 @@ function App() {
       {/* <Example text={"Hello"} /> */}
       <div className="md:p-6 p-1 w-full relative overflow-y-hidden font-primary max-h-screen">
         <div className=" overflow-hidden mx-auto">
-          <div className="sm:mx-48 mx-0 md:mx-96">
+          <div className="sm:mx-20 mx-0 md:mx-44 lg:mx-96">
             <Header isOpen={isOpen} toggleOpen={toggleOpen} />
 
             <section className=" relative md:mx-40 md:w-[80%] mx-auto mt-[7%] opacity-1">
@@ -144,7 +144,9 @@ function App() {
                     </span>
                     <span className="tracking-normal md:tracking-[-2px] relative w-1/2 md:w-full ">
                       Websites,
-                      <span className=" ml-1 ">mobile and web </span>{" "}
+                      <span className="ml-1 ">
+                        mobile <span className="md:-ml-2"> and web </span>{" "}
+                      </span>
                       applications
                     </span>
                   </h1>
@@ -152,17 +154,17 @@ function App() {
 
                 <div className="flex items-start gap-[7%] ">
                   <article className="flex flex-col">
-                    <h4 className="font-semibold inline-flex items-center text-[1.4rem]">
-                      One Billion{" "}
+                    <h4 className="font-semibold inline-flex items-center  gap-0 text-[1.4rem]">
+                      <span> One Billion </span>
                       <span>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          width="8"
-                          height="8"
+                          width="10"
+                          height="10"
                           viewBox="0 0 24 24"
                           fill="none"
                           stroke="currentColor"
-                          strokeWidth={2}
+                          strokeWidth={3}
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           className="lucide lucide-plus"
@@ -172,22 +174,22 @@ function App() {
                         </svg>
                       </span>
                     </h4>
-                    <span className="text-[1.2rem] tracking-wide">
+                    <span className="text-[1.2rem] tracking-normal">
                       Lives Touced
                     </span>
                   </article>
                   <article className="flex flex-col">
                     <h4 className="font-semibold inline-flex items-center text-[1.4rem]">
-                      30{" "}
+                      <span> 30</span>
                       <span>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          width="8"
-                          height="8"
+                          width="10"
+                          height="10"
                           viewBox="0 0 24 24"
                           fill="none"
                           stroke="currentColor"
-                          strokeWidth={2}
+                          strokeWidth={3}
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           className="lucide lucide-plus"
@@ -197,22 +199,22 @@ function App() {
                         </svg>
                       </span>
                     </h4>
-                    <span className="text-[1.2rem] tracking-wide">
+                    <span className="text-[1.2rem] tracking-normal">
                       Global Awards
                     </span>
                   </article>
                   <article className="flex flex-col">
                     <h4 className="font-semibold inline-flex items-center text-[1.4rem]">
-                      300{" "}
+                      <span>300</span>
                       <span>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          width="8"
-                          height="8"
+                          width="10"
+                          height="10"
                           viewBox="0 0 24 24"
                           fill="none"
                           stroke="currentColor"
-                          strokeWidth={2}
+                          strokeWidth={3}
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           className="lucide lucide-plus"
@@ -222,7 +224,9 @@ function App() {
                         </svg>
                       </span>
                     </h4>
-                    <span className="text-[1.2rem] tracking-wide">Clients</span>
+                    <span className="text-[1.2rem] tracking-normal">
+                      Clients
+                    </span>
                   </article>
                 </div>
               </div>
