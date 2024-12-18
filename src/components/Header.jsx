@@ -1,19 +1,15 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { motion, AnimatePresence, useCycle } from "framer-motion";
 import Hamburger from "./Hamburger";
 
-const Header = ({ isOpen, toggleOpen }) => {
-  const navLinks = [
+const Header = memo(({ isOpen, toggleOpen }) => {
+  const NAV_LINKS = [
     { label: "Services", href: "/services" },
     { label: "Projects", href: "/projects" },
     { label: "Process", href: "/process" },
     { label: "Industries", href: "/industries" },
     // { label: "Let's Talk", href: "/contact" },
   ];
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
 
   // const containerRef = useRef(null);
 
@@ -23,10 +19,11 @@ const Header = ({ isOpen, toggleOpen }) => {
         <div className="flex items-center justify-between w-full">
           {/* logo */}
           <div className="flex px-2 md:justify-center items-center gap-4 lg:gap-14 md:gap-10">
-            <div className="bg-[#3FDE8B] w-[48px] aspect-square" />
+            <div className="bg-[#3FDE8B] w-[48px] aspect-square" role="img" />
             <div className="flex-shrink-0 flex items-center">
               <a
                 href="/"
+                aria-label="Home"
                 className="hidden md:block text-black font-medium text-xs md:text-sm tracking-[0px] leading-[15px]"
               >
                 Web Development Company
@@ -35,7 +32,7 @@ const Header = ({ isOpen, toggleOpen }) => {
           </div>
           <div className="-mr-2 flex items-center sm:hidden">
             <button
-              onClick={toggleMenu}
+              onClick={toggleOpen}
               type="button"
               className="bg-white inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
               aria-expanded={isOpen}
@@ -44,10 +41,11 @@ const Header = ({ isOpen, toggleOpen }) => {
             </button>
           </div>
           <div className="hidden px-4 items-end justify-end sm:flex sm:items-center gap-4 lg:gap-[3.2rem]">
-            {navLinks.map((link, index) => (
+            {NAV_LINKS.map((link, index) => (
               <a
                 key={index}
                 href={link.href}
+                aria-label={link.label}
                 className="py-3 text-xs text-black hover:text-gray-900 opacity-75 hover:opacity-100 hover:border-b border-rojo tracking-tight"
               >
                 {link.label}
@@ -63,6 +61,6 @@ const Header = ({ isOpen, toggleOpen }) => {
       </div>
     </header>
   );
-};
+});
 
 export default Header;

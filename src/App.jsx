@@ -1,10 +1,4 @@
-import {
-  motion,
-  AnimatePresence,
-  useCycle,
-  animate,
-  useMotionValue,
-} from "framer-motion";
+import { motion, AnimatePresence, useCycle, delay } from "framer-motion";
 // import BackgroundWithImage from "./components/BackgroundWithImage";
 import Header from "./components/Header";
 import Example from "./components/FlipText";
@@ -53,9 +47,12 @@ const sidebarVariants = {
     width: "calc(100% - 3rem)", // 3rem equals 6 * 0.5rem margin on both sides
 
     transition: {
+      duration: 1,
       when: "afterChildren",
-      staggerChildren: 0.1,
+      staggerChildren: 0.05,
       delayChildren: 0.2,
+      backgroundColor: { delay: 0.2 }, // Color changes mid-sequence
+      height: { delay: 0.2 }, // Height closes last
     },
   },
   open: {
@@ -64,6 +61,9 @@ const sidebarVariants = {
     width: "calc(100% - 3rem)", // 3rem equals 6 * 0.5rem margin on both sides
 
     transition: {
+      duration: 1,
+
+      height: { duration: 0.3 },
       when: "beforeChildren",
       staggerChildren: 0.1,
       delayChildren: 0.2,
@@ -73,18 +73,23 @@ const sidebarVariants = {
 
 // Background color animation variants
 const backgroundVariants = {
-  initial: { backgroundColor: "rgba(227, 18, 48, 1)" },
+  initial: {
+    backgroundColor: "rgba(227, 18, 48, 1)",
+    // opacity: 0,
+  },
   animate: {
     backgroundColor: "rgba(54, 194, 58, 1)",
+    // opacity: 1,
     transition: {
       duration: 2,
+      // delay: 0.5,
       ease: "easeInOut",
     },
   },
   exit: {
     backgroundColor: "rgba(255, 0, 0, 1)",
     transition: {
-      duration: 1,
+      duration: 0.5,
       ease: "easeInOut",
     },
   },
@@ -94,28 +99,19 @@ const backgroundVariants = {
 const linkVariants = {
   closed: {
     opacity: 0,
-    x: -20,
+    // y: 20,
     transition: {
-      // y: { stiffness: 1000 },
-      duration: 1,
+      duration: 0.3,
+      ease: "easeInOut",
     },
   },
   open: {
     opacity: 1,
-    x: 0,
+    // y: 0,
     transition: {
-      type: "spring",
-      damping: 24,
-      duration: 1,
-      x: { stiffness: 1000, velocity: -100 },
-    },
-  },
-  exit: {
-    opacity: 0,
-    x: -20,
-    transition: {
-      // y: { stiffness: 1000 },
-      duration: 0.2,
+      duration: 0.3,
+      delay: 0.4, // Delay to come after other elements
+      ease: "easeInOut",
     },
   },
 };
@@ -154,7 +150,7 @@ function App() {
                   </h1>
                 </div>
 
-                <div className="flex items-start gap-[7%] bg-red-300/15">
+                <div className="flex items-start gap-[7%] ">
                   <article className="flex flex-col">
                     <h4 className="font-semibold inline-flex items-center text-[1.4rem]">
                       One Billion{" "}
@@ -250,15 +246,6 @@ function App() {
               >
                 <div className="flex md:flex-row flex-col w-full min-h-screen">
                   <motion.div
-                    // initial={{ backgroundColor: "red" }}
-                    // animate={{
-                    //   backgroundColor: "green",
-                    //   transition: {
-                    //     duration: 1,
-                    //     ease: "easeInOut",
-                    //   },
-                    // }}
-                    // exit={{ backgroundColor: "red" }}
                     initial="initial"
                     animate="animate"
                     exit="exit"
@@ -266,31 +253,22 @@ function App() {
                     className="md:w-[60%] py-[3em] grid grid-cols-1 items-end"
                   >
                     <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{
-                        // duration: 10,
-                        opacity: 1,
-                        ease: "easeInOut",
-                      }}
-                      // exit={{ opacity: 0 }}
-                      transition={{ duration: 5 }}
+                      variants={linkVariants}
+                      initial="closed"
+                      animate="open"
+                      exit="closed"
                       className="flex md:flex-row items-start justify-start flex-col w-full mt-[10%] md:mt-[4.2%] gap-[5%] md:gap-[10%]"
                     >
-                      <ul className="flex mt-[1%] md:ml-[13%] flex-1 md:w-fit mx-0 text-left flex-col items-start justify-start">
+                      <ul
+                        variants={linkVariants}
+                        className="flex mt-[1%] md:ml-[13%] flex-1 md:w-fit mx-0 text-left flex-col items-start justify-start"
+                      >
                         {navLinks.slice(0, 5).map((link, index) => (
                           <Example
                             className="w-full text-white text-3xl px-6 pb-[2rem] font-bold"
                             link={link.label}
                             href={link.href}
                           />
-                          // <a
-                          //   key={index}
-                          //   href={link.href}
-                          //   variants={linkVariants}
-                          //   className="w-full text-white text-3xl px-6 pb-[2rem] font-bold"
-                          // >
-                          //   {link.label}
-                          // </a>
                         ))}
                       </ul>
                       <div className="flex md:w-3/4 items-start  md:mx-auto text-left justify-start">
@@ -314,21 +292,14 @@ function App() {
                           ))}
                         </div>
                       </div>
-                      {/* <div className="flex w-1/3 flex-col items-start justify-start">
-                        {navLinks.slice(11).map((link, index) => (
-                          <motion.a
-                            key={index}
-                            href={link.href}
-                            variants={linkVariants}
-                            className="text-md md:ml-[18%] w-full  max-sm:px-6 text-left pb-[0.6rem] text-white"
-                          >
-                            {link.label}
-                          </motion.a>
-                        ))}
-                      </div> */}
                     </motion.div>
 
-                    <div>
+                    <motion.div
+                      variants={linkVariants}
+                      initial="closed"
+                      animate="open"
+                      exit="closed"
+                    >
                       <ul className="flex  max-sm:flex-wrap mt-[5%] md:mt-[1%] ml-[1%] md:ml-[13%] w-fit text-left items-center justify-center">
                         {socialLink.map((link, index) => (
                           <Example
@@ -338,44 +309,45 @@ function App() {
                           />
                         ))}
                       </ul>
-                    </div>
+                    </motion.div>
                   </motion.div>
 
                   <div className="md:w-[40%] bg-purple py-[3em] grid grid-cols-1 max-sm:gap-24 items-end">
-                    <div className=" flex  space-y-8 flex-col items-start gap-0 justify-center ml-[6%] md:ml-[16%]  mt-[6%] text-white">
+                    <motion.div
+                      variants={linkVariants}
+                      initial="closed"
+                      animate="open"
+                      exit="closed"
+                      className=" flex  space-y-8 flex-col items-start gap-0 justify-center ml-[6%] md:ml-[16%]  mt-[6%] text-white"
+                    >
                       <p className="text-sm ">Got An Idea?</p>
-                      <h2 className="text-3xl tracking-tight font-bold w-[100%] leading-[110%]">
+                      <h2 className="text-3xl tracking-tight font-bold w-[55%] leading-[120%]">
                         Let's Craft Brillliance together!
                       </h2>
 
                       <button className="rounded-full border-2 max-sm:my-[3%] bg-green-500 text-white text-sm px-[1.2em] py-[1.1em] border-white">
                         Get in touch
                       </button>
-                    </div>
+                    </motion.div>
 
-                    <div>
+                    <motion.div
+                      variants={linkVariants}
+                      initial="closed"
+                      animate="open"
+                      exit="closed"
+                    >
                       <ul className="flex mt-[0%] ml-[6%] md:ml-[14%] w-fit text-left items-center justify-start">
                         {country.map((link, index) => (
-                          <a
-                            key={index}
+                          <Example
+                            className="w-fit text-white text-sm px-4 pb-[2rem] font-medium"
+                            link={link.label}
                             href={link.href}
-                            variants={linkVariants}
-                            className="w-full text-white text-sm px-4 pb-[2rem] font-medium"
-                          >
-                            {link.label}
-                          </a>
+                          />
                         ))}
                       </ul>
-                    </div>
+                    </motion.div>
                   </div>
                 </div>
-
-                {/* <motion.a
-                  variants={linkVariants}
-                  className="text-3xl text-white  hover:text-gray-200 transition-colors duration-300"
-                >
-                  Let's talk
-                </motion.a> */}
               </motion.div>
             )}
           </AnimatePresence>
