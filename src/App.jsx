@@ -1,7 +1,7 @@
 import { motion, AnimatePresence, useCycle, delay } from "framer-motion";
 // import BackgroundWithImage from "./components/BackgroundWithImage";
 import Header from "./components/Header";
-import Example from "./components/FlipText";
+import Example from "./components/TextAnimation";
 
 const navLinks = [
   { label: "Home", href: "/home" },
@@ -81,7 +81,7 @@ const backgroundVariants = {
     backgroundColor: "rgba(54, 194, 58, 1)",
     // opacity: 1,
     transition: {
-      duration: 2,
+      duration: 0.5,
       // delay: 0.5,
       ease: "easeInOut",
     },
@@ -275,7 +275,10 @@ function App() {
                           />
                         ))}
                       </ul>
-                      <div className="flex md:w-3/4 items-start  md:mx-auto text-left justify-start">
+
+                      <div className="md:hidden w-1/2 m-[1em] h-[1px] bg-white" />
+
+                      <div className="flex md:pt-0 t-[1em] w-3/4 md:w-3/4 items-start  md:mx-auto text-left justify-between md:justify-start">
                         <div className="flex md:w-1/2  md:ml-[12%] flex-col items-start  md:mx-auto text-left justify-start">
                           {navLinks.slice(5, 11).map((link, index) => (
                             <Example
@@ -297,14 +300,16 @@ function App() {
                         </div>
                       </div>
                     </motion.div>
+                    <div className="md:hidden w-1/2 m-[1em] h-[1px] bg-white" />
 
                     <motion.div
+                      className="block max-sm:py-[1em]"
                       variants={linkVariants}
                       initial="closed"
                       animate="open"
                       exit="closed"
                     >
-                      <ul className="flex  max-sm:flex-wrap mt-[5%] md:mt-[1%] ml-[1%] md:ml-[13%] w-fit text-left items-center justify-center">
+                      <ul className="flex max-sm:flex-wrap md:mt-[1%] ml-[1%] md:ml-[13%] w-fit text-left items-center md:justify-center justify-between">
                         {socialLink.map((link, index) => (
                           <Example
                             className="w-fit text-white text-sm px-4 pb-[2rem] font-medium"
@@ -325,11 +330,11 @@ function App() {
                       className=" flex  space-y-8 flex-col items-start gap-0 justify-center ml-[6%] md:ml-[16%]  mt-[6%] text-white"
                     >
                       <p className="text-sm ">Got An Idea?</p>
-                      <h2 className="text-3xl tracking-tight font-bold w-[55%] leading-[120%]">
+                      <h2 className="text-3xl tracking-tight font-bold  md:w-[55%] leading-[120%]">
                         Let's Craft Brillliance together!
                       </h2>
 
-                      <button className="rounded-full border-2 max-sm:my-[3%] bg-green-500 text-white text-sm px-[1.2em] py-[1.1em] border-white">
+                      <button className="rounded-full border-2 max-sm:my-[3%] bg-green-500 text-white text-sm px-[1.2em] font-semibold py-[1.1em] border-white">
                         Get in touch
                       </button>
                     </motion.div>
