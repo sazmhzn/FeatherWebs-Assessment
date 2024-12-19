@@ -127,7 +127,7 @@ function App() {
           <div className="sm:mx-20 mx-0 md:mx-44 lg:mx-96">
             <Header isOpen={isOpen} toggleOpen={toggleOpen} />
 
-            <section className=" relative md:mx-40 md:w-[80%] mx-auto mt-[7%] opacity-1">
+            <section className="relative md:mx-40 md:w-[80%] mx-auto mt-[7%] opacity-1">
               <div className="mx-auto max-sm:w-[90%] md:pl-[5rem] mb-[8%]">
                 <div className="mb-14">
                   <span className="h-16 max-sm:hidden top-[2%] md:top-[4%] absolute left-8 w-[2px] bg-red-600" />
@@ -254,14 +254,14 @@ function App() {
                     animate="animate"
                     exit="exit"
                     variants={backgroundVariants}
-                    className="md:w-[60%] py-[3em] grid grid-cols-1 items-end"
+                    className="md:w-[60%] py-[4em] grid grid-cols-1 items-end"
                   >
                     <motion.div
                       variants={linkVariants}
                       initial="closed"
                       animate="open"
                       exit="closed"
-                      className="flex md:flex-row items-start justify-start flex-col w-full mt-[10%] md:mt-[4.2%] gap-[5%] md:gap-[10%]"
+                      className="flex md:flex-row items-start justify-start flex-col w-full mt-[10%] md:mt-[3%] gap-[5%] md:gap-[10%]"
                     >
                       <ul
                         variants={linkVariants}
@@ -289,10 +289,10 @@ function App() {
                           ))}
                         </div>
 
-                        <div className="flex md:w-1/2  md:ml-[0%] flex-col items-center md:mx-auto text-left justify-start">
+                        <div className="flex md:w-1/2 md:ml-[0%] flex-col items-center md:mx-auto text-left justify-between ">
                           {navLinks.slice(11).map((link, index) => (
                             <Example
-                              className="text-md md:ml-[18%] w-full  max-sm:px-6 text-left pb-[0.5rem] text-white"
+                              className="text-md md:ml-[18%] w-full  max-sm:px-6 text-left pb-[0.6rem] text-white"
                               link={link.label}
                               href={link.href}
                             />
@@ -300,7 +300,6 @@ function App() {
                         </div>
                       </div>
                     </motion.div>
-                    <div className="md:hidden w-1/2 m-[1em] h-[1px] bg-white" />
 
                     <motion.div
                       className="block max-sm:py-[1em]"
@@ -309,7 +308,8 @@ function App() {
                       animate="open"
                       exit="closed"
                     >
-                      <ul className="flex max-sm:flex-wrap md:mt-[1%] ml-[1%] md:ml-[13%] w-fit text-left items-center md:justify-center justify-between">
+                      <div className="md:hidden w-1/2 m-[1em] h-[1px] bg-white" />
+                      <ul className="flex max-sm:flex-wrap md:mt-[1%] ml-[1%] md:ml-[13%] w-fit text-left items-center md:justify-center justify-start">
                         {socialLink.map((link, index) => (
                           <Example
                             className="w-fit text-white text-sm px-4 pb-[2rem] font-medium"
